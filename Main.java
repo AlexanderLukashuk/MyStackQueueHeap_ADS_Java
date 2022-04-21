@@ -58,5 +58,23 @@ public class Main {
         System.out.println("Size = " + queue.size());
         System.out.println("Peek = " + queue.peek());
         queue.print();
+
+        MyHeap<Integer> heap = new MyHeap<>();
+
+        System.out.println("Empty? " + heap.empty());
+        System.out.println("Size = " + heap.size());
+        System.out.println("Peek = " + heap.getMin());
+
+        heap.insert(44);
+        heap.insert(23);
+        heap.insert(133);
+        heap.insert(19);
+        heap.insert(199);
+        heap.insert(55);
+
+        System.out.println("Empty? " + heap.empty());
+        System.out.println("Size = " + heap.size());
+        System.out.println("Peek = " + heap.getMin());
+        heap.print();
     }
 }
