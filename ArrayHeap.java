@@ -2,15 +2,15 @@ package com.company;
 
 import java.util.Arrays;
 
-public class MyHeap<T extends Comparable<T>> {
+public class ArrayHeap<T extends Comparable<T>> {
 
-    private MyLinkedList<T> list;
-//    private MyArrayList<T> list;
+//    private MyLinkedList<T> list;
+        private MyArrayList<T> list;
     private int maxsize;
 
-    public MyHeap(int maxsize) {
-        list = new MyLinkedList<>();
-//        list = new MyArrayList<>();
+    public ArrayHeap() {
+//        list = new MyLinkedList<>();
+        list = new MyArrayList<>();
         this.maxsize = maxsize;
     }
 
@@ -27,46 +27,46 @@ public class MyHeap<T extends Comparable<T>> {
     }
 
     public void insert(T item) {
-//        if (list.size() == 0) {
-//            list.add(item);
-//        } else {
-//            list.add(item);
-//            int current = 0;
-//
+        if (list.size() == 0) {
+            list.add(item);
+        } else {
+            list.add(item);
+            int current = list.size() - 2;
+
 //            System.out.println(leftChildOf(current));
 //            System.out.println(rightChildOf(current));
-//
-//            while (((Comparable<T>)list.get(leftChildOf(current))).compareTo((T)list.get(rightChildOf(current))) < 0 && leftChildOf(current) < list.size() && rightChildOf(current) < list.size()) {
-//
+
+            while (((Comparable<T>)list.get(leftChildOf(current))).compareTo((T)list.get(rightChildOf(current))) < 0 && leftChildOf(current) < list.size() && rightChildOf(current) < list.size()) {
+
 //                System.out.println(leftChildOf(current));
 //                System.out.println(rightChildOf(current));
-//
-//                swap(current, parentOf(current));
-//                current = parentOf(current);
-//            }
-//        }
 
-        if (list.size() >= maxsize) {
-            return;
+                swap(current, parentOf(current));
+                current = parentOf(current);
+            }
         }
 
-        list.add(item);
-//        int current = list.size();
+//        if (list.size() >= maxsize) {
+//            return;
+//        }
 //
+//        list.add(item);
+////        int current = list.size();
+////
+////        while (((Comparable<T>)list.get(current)).compareTo((T)list.get(parentOf(current))) < 0) {
+////
+//////                System.out.println(leftChildOf(current));
+//////                System.out.println(rightChildOf(current));
+////
+////                swap(current, parentOf(current));
+////                current = parentOf(current);
+////        }
+//
+//        int current = list.size();
 //        while (((Comparable<T>)list.get(current)).compareTo((T)list.get(parentOf(current))) < 0) {
 //
-////                System.out.println(leftChildOf(current));
-////                System.out.println(rightChildOf(current));
-//
-//                swap(current, parentOf(current));
-//                current = parentOf(current);
 //        }
-
-        int current = list.size();
-        while (((Comparable<T>)list.get(current)).compareTo((T)list.get(parentOf(current))) < 0) {
-
-        }
-
+//
         heapifyUp(list.size() - 1);
     }
 
@@ -100,18 +100,19 @@ public class MyHeap<T extends Comparable<T>> {
 
     private void swap(int index1, int index2) {
         T temp;
+//        temp = list.get(index1);
         temp = list.get(index1);
 
-        list.remove(index1);
+//        list.remove(index1);
         list.add(list.get(index2), index1);
 
-        list.remove(index2);
+//        list.remove(index2);
         list.add(temp, index2);
     }
 
     public void print() {
-        list.ShowList();
-//        list.ShowArray();
+//        list.ShowList();
+        list.ShowArray();
     }
 
 //    private int d = 2;
