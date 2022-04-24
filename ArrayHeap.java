@@ -1,18 +1,25 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ArrayHeap<T extends Comparable<T>> {
-
-//    private MyLinkedList<T> list;
-        private MyArrayList<T> list;
+    private MyArrayList<T> list;
+    private int size;
     private int maxsize;
 
     public ArrayHeap() {
 //        list = new MyLinkedList<>();
         list = new MyArrayList<>();
-        this.maxsize = maxsize;
+        this.maxsize = 3;
     }
+
+    public ArrayHeap(int maxsize) {
+        list = new MyArrayList<>(maxsize);
+        this.maxsize = maxsize;
+        this.size = 0;
+    }
+
 
     public boolean empty() {
         return list.size() == 0;
@@ -26,48 +33,31 @@ public class ArrayHeap<T extends Comparable<T>> {
         return list.get(0);
     }
 
-    public void insert(T item) {
-        if (list.size() == 0) {
+    private void increaseCapacity() {
+        maxsize = 2 * maxsize;
+    }
+
+    public void insert(T item){
+        if (size == 0){
             list.add(item);
-        } else {
-            list.add(item);
-            int current = list.size() - 2;
-
-//            System.out.println(leftChildOf(current));
-//            System.out.println(rightChildOf(current));
-
-            while (((Comparable<T>)list.get(leftChildOf(current))).compareTo((T)list.get(rightChildOf(current))) < 0 && leftChildOf(current) < list.size() && rightChildOf(current) < list.size()) {
-
-//                System.out.println(leftChildOf(current));
-//                System.out.println(rightChildOf(current));
-
-                swap(current, parentOf(current));
-                current = parentOf(current);
-            }
         }
 
-//        if (list.size() >= maxsize) {
-//            return;
-//        }
-//
-//        list.add(item);
-////        int current = list.size();
-////
-////        while (((Comparable<T>)list.get(current)).compareTo((T)list.get(parentOf(current))) < 0) {
-////
-//////                System.out.println(leftChildOf(current));
-//////                System.out.println(rightChildOf(current));
-////
-////                swap(current, parentOf(current));
-////                current = parentOf(current);
-////        }
-//
-//        int current = list.size();
-//        while (((Comparable<T>)list.get(current)).compareTo((T)list.get(parentOf(current))) < 0) {
-//
-//        }
-//
-        heapifyUp(list.size() - 1);
+        if (size >= maxsize){
+//            maxsize++;
+            increaseCapacity();
+            System.out.println("Che za huina? " + maxsize);
+            return;
+        }
+        size++;
+        list.add(item);
+        int current = size;
+
+        while(list.get(current).compareTo(list.get(parentOf(current))) > 0 && current > 0){
+            swap(current, parentOf(current));
+            current = parentOf(current);
+        }
+
+        heapifyUp(current);
     }
 
     private void heapifyUp(int i) {
@@ -103,10 +93,10 @@ public class ArrayHeap<T extends Comparable<T>> {
 //        temp = list.get(index1);
         temp = list.get(index1);
 
-//        list.remove(index1);
+        list.remove(index1);
         list.add(list.get(index2), index1);
 
-//        list.remove(index2);
+        list.remove(index2);
         list.add(temp, index2);
     }
 

@@ -9,6 +9,11 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         arr = new Object[capacity];
     }
 
+    public MyArrayList(int capacity) {
+        this.capacity = capacity;
+        arr = new Object[capacity];
+    }
+
 
     public void add(T item) {
         if (length == capacity)
@@ -42,16 +47,6 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public T remove(int index) {
-//        if (index > length) {
-//            System.out.println("There is not such element with " + index + " index!");
-//            throw new IndexOutOfBoundsException();
-//        }
-//        T removeItem = (T) arr[index];
-//        if (index >= 0)
-//            System.arraycopy(arr, index + 1, arr, index, length - index - 1);
-//        length--;
-//        return removeItem;
-
         T removeItem = (T) arr[index];
         Object[] newArr = new Object[capacity];
         for (int i = 0, j = 0; i < capacity; i++) {
@@ -142,7 +137,9 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     public void ShowArray() {
         for (int i = 0; i < capacity; i++) {
-            System.out.print(arr[i] + " ");
+            if (arr[i] != null) {
+                System.out.print(arr[i] + " ");
+            }
         }
         System.out.println();
     }
